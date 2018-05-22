@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: swimming-pool-notification-service
+server:
+  port: 8888
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://swimming-pool-eureka:8761/eureka/
+  instance:
+    hostname: localhost

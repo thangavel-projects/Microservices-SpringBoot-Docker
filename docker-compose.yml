@@ -1,0 +1,64 @@
+version: '3.5'
+services:
+
+  mongodb:
+    container_name: mongodbdatabase
+    image: mongo
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    volumes:
+      - ./data/db:/data/db
+    ports:
+      - 27017:27017
+    command: mongod --smallfiles --logpath=/dev/null
+    networks:
+      - my-network
+      
+  reservation-service:
+    container_name: swimming-pool-reservation
+    image: swimming-pool/reservation-service
+    environment:
+     - SPRING_PROFILES_ACTIVE=dev
+    ports:
+     - 8181:8181
+    links:
+     - mongodb
+    networks:
+     - my-network
+     
+  #notification-service:
+    #container_name: swimming-pool-notification
+    #image: swimming-pool/notification-service
+    #environment:
+     #- SPRING_PROFILES_ACTIVE=dev
+    #ports:
+     #- 8888:8888
+    #networks:
+     #- my-network
+     
+  discovery-service:
+    container_name: swimming-pool-eureka
+    image: swimming-pool/discovery-service
+    environment:
+     - SPRING_PROFILES_ACTIVE=dev
+    ports:
+     - 8761:8761
+    networks:
+     - my-network
+     
+  web-ui-service:
+    container_name: swimming-pool-web-ui
+    image: swimming-pool/web-ui-service
+    environment:
+     - SPRING_PROFILES_ACTIVE=dev
+    ports:
+     - 8080:8080
+    links: 
+     - mongodb
+     - reservation-service
+    networks:
+     - my-network
+       
+networks:
+  my-network:

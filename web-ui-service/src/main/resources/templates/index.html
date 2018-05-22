@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Swimming Pool Appointment Scheduling</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /></head>
+<body>
+	<div>
+    <h2>Available Schedule</h2>
+    <table border="1">
+        <tr>
+            <th>Date</th>
+            <th>StartTime</th>
+            <th>Duration</th>
+            <th>Capacity</th>
+        </tr>
+        <tr th:each="data : ${registration}">
+            <td th:text="${data.date}"></td>
+            <td th:text="${data.startTime}"></td>
+            <td th:text="${data.duration}"></td>
+            <td th:text="${data.capacity}"></td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>

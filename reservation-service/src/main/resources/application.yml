@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: swimming-pool-reservation-service
+  data:
+    mongodb:
+      uri: mongodb://mongodbdatabase:27017/swimming-pool
+      repositories:
+        enabled: true
+server:
+  port: 8181
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://swimming-pool-eureka:8761/eureka/
+  instance:
+    hostname: localhost

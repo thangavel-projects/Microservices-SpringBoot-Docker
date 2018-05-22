@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: swimming-pool-web-ui-service
+  mvc:
+    view: 
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+    static-path-pattern: /resources/**
+server:
+  port: 8080
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://swimming-pool-eureka:8761/eureka/
+  instance:
+    hostname: localhost
+  
